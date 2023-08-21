@@ -1,0 +1,38 @@
+version: '3'
+
+services: 
+  db:
+    container_name: my-db88
+    ports:
+      - 54322:5432
+    environment:
+      - POSTGRES_USER=sorasit
+      - POSTGRES_PASSWORD=sorasit
+    image: postgres:latest
+    restart: unless-stopped
+
+  pgadmin:
+     container_name: pg-admin88
+     ports:
+       - 8080:80
+     environment:
+       - PGADMIN_DEFAULT_EMAIL=sorasit-r@rmutp.ac.th
+       - PGADMIN_DEFAULT_PASSWORD=sorasit
+     image: 'dpage/pgadmin4:latest'
+     restart: unless-stopped
+
+  strapi:
+    container_name: 'sorasit-strapi'
+    image: 'naskio/strapi:latest'
+    ports:
+      - 1337:1337
+    environment:
+      - name=value
+      - DATABASE_CLIENT=postgres
+      - DATABASE_HOST=172.26.29.159
+      - DATABASE_PORT=54322
+      - DATABASE_NAME=sorasit
+      - DATABASE_USERNAME=sorasit
+      - DATABASE_PASSWORD=sorasit
+      - DATABASE_SSL=false
+    restart: 'unless-stopped'
