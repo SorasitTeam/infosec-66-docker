@@ -6,8 +6,8 @@ services:
     ports:
       - 54322:5432
     environment:
-      - POSTGRES_USER=sorasit
-      - POSTGRES_PASSWORD=sorasit
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
     image: postgres:latest
     restart: unless-stopped
 
