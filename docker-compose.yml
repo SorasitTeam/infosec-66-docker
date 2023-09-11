@@ -6,8 +6,8 @@ services:
     ports:
       - 54322:5432
     environment:
-      - POSTGRES_USER=sorasit
-      - POSTGRES_PASSWORD=sorasit
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
     image: postgres:latest
     restart: unless-stopped
 
@@ -16,23 +16,22 @@ services:
      ports:
        - 8080:80
      environment:
-       - PGADMIN_DEFAULT_EMAIL=sorasit-r@rmutp.ac.th
-       - PGADMIN_DEFAULT_PASSWORD=sorasit
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PASSWORD}
      image: 'dpage/pgadmin4:latest'
      restart: unless-stopped
 
   strapi:
-    container_name: 'sorasit-strapi'
+    container_name: sorasit-strapi
     image: 'naskio/strapi:latest'
     ports:
       - 1337:1337
     environment:
-      - name=value
-      - DATABASE_CLIENT=postgres
-      - DATABASE_HOST=172.26.29.159
-      - DATABASE_PORT=54322
-      - DATABASE_NAME=sorasit
-      - DATABASE_USERNAME=sorasit
-      - DATABASE_PASSWORD=sorasit
+      - DATABASE_CLIENT=${D_CLIENT} 
+      - DATABASE_HOST=${D_HOST}
+      - DATABASE_PORT=${D_PORT} 
+      - DATABASE_NAME=${D_NAME} 
+      - DATABASE_USERNAME=${D_USERNAME}   
+      - DATABASE_PASSWORD=${D_PASSWORD} 
       - DATABASE_SSL=false
     restart: 'unless-stopped'
